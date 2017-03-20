@@ -22,7 +22,7 @@
 # (c) 2014-2016 cpp-ethereum contributors.
 #------------------------------------------------------------------------------
 
-cmake_minimum_required(VERSION 3.4.3)
+cmake_minimum_required(VERSION 3.5.1)
 
 if (NOT DEFINED CMAKE_TOOLCHAIN_FILE)
     # The default toolchain file configures compilers and build environment.
@@ -40,6 +40,12 @@ set(CPP_ETHEREUM_DIR "${CMAKE_CURRENT_LIST_DIR}" CACHE PATH "Path to the root di
 include(EthPolicy)
 eth_policy()
 
+include(HunterGate)
+HunterGate(
+    URL "https://github.com/ruslo/hunter/archive/v0.18.37.tar.gz"
+    SHA1 "ffda45019567a03f18894baa6bde42d0b3209e5f"
+)
+
 # project name and version should be set after cmake_policy CMP0048
 project(cpp-ethereum VERSION "1.3.0")
 
@@ -55,7 +61,9 @@ include(EthExecutableHelper)
 include(EthDependencies)
 include(EthUtils)
 
-include(ProjectBoost)
+hunter_add_package(Boost COMPONENTS filesystem random system thread test)
+find_package(Boost CONFIG REQUIRED filesystem random system thread unit_test_framework)
+
 include(ProjectCryptopp)
 include(ProjectJsonCpp)
 include(ProjectJsonRpcCpp)

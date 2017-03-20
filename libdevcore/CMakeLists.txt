@@ -3,13 +3,11 @@ file(GLOB HEADERS "*.h")
 
 add_library(devcore ${SRC_LIST} ${HEADERS})
 
-target_include_directories(devcore PRIVATE ..)
-target_include_directories(devcore SYSTEM PUBLIC ${BOOST_INCLUDE_DIR})
-
 add_dependencies(devcore BuildInfo.h)
 
-if (NOT EMSCRIPTEN)
-    find_package(LevelDB)
-    target_include_directories(devcore SYSTEM PUBLIC ${LEVELDB_INCLUDE_DIRS})
-    target_link_libraries(devcore Boost::Filesystem Boost::Random Boost::Thread ${LEVELDB_LIBRARIES})
-endif()
+find_package(LevelDB)
+target_include_directories(devcore PRIVATE ..)
+# We have to add boost include dir explicitly before leveldb, not to
+# include system-level boost if installed.
+target_include_directories(devcore SYSTEM PUBLIC ${Boost_INCLUDE_DIRS} ${LEVELDB_INCLUDE_DIRS})
+target_link_libraries(devcore Boost::filesystem Boost::system Boost::random Boost::thread ${LEVELDB_LIBRARIES})
