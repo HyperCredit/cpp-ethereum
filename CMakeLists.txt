@@ -42,8 +42,8 @@ eth_policy()
 
 include(HunterGate)
 HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.18.37.tar.gz"
-    SHA1 "ffda45019567a03f18894baa6bde42d0b3209e5f"
+    URL "https://github.com/ruslo/hunter/archive/v0.18.39.tar.gz"
+    SHA1 "a6fbc056c3d9d7acdaa0a07c575c9352951c2f6c"
 )
 
 # project name and version should be set after cmake_policy CMP0048
