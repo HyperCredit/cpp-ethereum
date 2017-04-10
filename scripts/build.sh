@@ -33,7 +33,7 @@ cd build
 if [ $(uname -s) == "Linux" ]; then
     cmake .. -DCMAKE_BUILD_TYPE=$1 -DTESTS=$2 -DCOVERAGE=On -DEVMJIT=On -DLLVM_DIR=/usr/lib/llvm-3.9/lib/cmake/llvm
 else
-    cmake .. -DCMAKE_BUILD_TYPE=$1 -DTESTS=$2 -DCOVERAGE=On
+    cmake .. -DCMAKE_VERBOSE_MAKEFILE=On -DHUNTER_STATUS_DEBUG=On -DCMAKE_BUILD_TYPE=$1 -DTESTS=$2 -DCOVERAGE=On
 fi
 
 make -j2
